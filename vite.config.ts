@@ -4,14 +4,10 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import { viteMockServe } from 'vite-plugin-mock'
 import viteCompression from 'vite-plugin-compression'
-import styleImport, { VantResolve } from 'vite-plugin-style-import'
 
 export default defineConfig({
   plugins: [
     vue(),
-    styleImport({
-      resolves: [VantResolve()]
-    }),
     viteMockServe({
       // default
       mockPath: 'mock'

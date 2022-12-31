@@ -44,7 +44,6 @@
     "nprogress": "^0.2.0",
     "pinia": "^2.0.14",
     "qs": "^6.10.3",
-    "vant": "^3.4.9",
     "vue": "^3.2.6",
     "vue-router": "^4.0.15"
   },
@@ -81,7 +80,6 @@
     "vite": "^2.9.9",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-mock": "^2.9.6",
-    "vite-plugin-style-import": "1.4.1",
     "vue-jest": "^5.0.0-alpha.7",
     "vue-tsc": "^0.34.12"
   }
