@@ -1,23 +1,24 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import qs from 'qs'
+import { message } from 'ant-design-vue'
 
-// 获取Token
-const AUTH_TOKEN: () => string | boolean = () =>
-  window.localStorage.getItem('_AUTH_TOKEN') || false
+// 获取本地Token
+const getToken: () => string = () => window.localStorage.getItem('_AUTH_TOKEN') || ''
 
+// 配置axios实例
 const instance = axios.create()
-// 设置基本请求源
 instance.defaults.baseURL = import.meta.env.VITE_BASE_URL
 instance.defaults.timeout = 8000
 instance.defaults.withCredentials = false
 instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 instance.defaults.transformRequest = (data) => qs.stringify(data)
-// 状态码大于400的都将视作失败
 instance.defaults.validateStatus = (status) => status >= 200 && status <= 400
+
+// 添加请求拦截器
 instance.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     // 在发送请求之前做些什么
-    config.headers!.Authorization = AUTH_TOKEN()
+    config.headers!.Authorization = getToken()
     return config
   },
   () =>
@@ -32,22 +33,22 @@ instance.interceptors.response.use(
   (error) => {
     if (!window.navigator.onLine) {
       // 断网处理比如跳转到断网页面
-      Error('网络异常，请检查网络')
+      message.error('网络异常，请检查网络').then()
       return Promise.reject(error)
     }
     if (!error.response) {
-      Error('系统繁忙，请稍后再试')
+      message.error('系统繁忙，请稍后再试').then()
       return Promise.reject(error)
     }
     // 统一处理400以上的状态码
     if (error.response.status === 401) {
-      Error('用户未认证')
+      message.error('用户未认证').then()
     } else if (error.response.status === 403) {
-      Error('token过期了')
+      message.error('token过期了').then()
     } else if (error.response.status === 404) {
-      Error('访问内容不存在')
+      message.error('访问内容不存在').then()
     } else if (error.response.status === 500) {
-      Error('系统繁忙，请稍后再试')
+      message.error('系统繁忙，请稍后再试').then()
     }
     return Promise.reject(error)
   }
