@@ -16,9 +16,17 @@
       </div>
     </section>
     <section class="switch-theme">
-      <a-switch v-model:checked="checked">
-        <template #checkedChildren><check-outlined /></template>
-        <template #unCheckedChildren><close-outlined /></template>
+      <a-switch v-model:checked="checked" class="switch">
+        <template #checkedChildren>
+          <span class="switch-svg">
+            <SvgIcon name="sun" />
+          </span>
+        </template>
+        <template #unCheckedChildren>
+          <span class="switch-svg">
+            <SvgIcon name="moon" />
+          </span>
+        </template>
       </a-switch>
     </section>
   </nav>
@@ -26,7 +34,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons-vue'
+import SvgIcon from '@/components/SvgIcon.vue'
 
 const checked = ref<boolean>(false)
 </script>
@@ -68,6 +76,14 @@ nav {
     }
   }
   > .switch-theme {
+  }
+}
+.switch {
+  background: #151515;
+  padding: 2px;
+  .switch-svg {
+    display: flex;
+    align-items: center;
   }
 }
 </style>
