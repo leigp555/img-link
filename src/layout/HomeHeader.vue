@@ -5,14 +5,14 @@
     </section>
     <section class="navbar">
       <div class="navbar-left">
-        <router-link to="">Home</router-link>
-        <router-link to="">About</router-link>
-        <router-link to="">Concat</router-link>
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About</router-link>
+        <router-link to="/concat">Concat</router-link>
       </div>
       <div class="navbar-right">
-        <router-link to="">ChangeLog</router-link>
-        <router-link to="">API Docs</router-link>
-        <router-link to="">Manage</router-link>
+        <router-link to="/changeLog">ChangeLog</router-link>
+        <router-link to="/apiDocs">API Docs</router-link>
+        <router-link to="/manage">Manage</router-link>
       </div>
     </section>
     <section class="switch-theme">
@@ -63,15 +63,22 @@ nav {
   > .navbar {
     display: flex;
     flex-grow: 10;
+    .router-link-exact-active {
+      font-weight: 600;
+      color: #1890ff;
+    }
     > .navbar-left {
       flex-grow: 10;
+      flex-wrap: nowrap;
       > a {
         margin-right: 30px;
       }
     }
     > .navbar-right {
+      flex-wrap: nowrap;
       > a {
         margin-left: 30px;
+        white-space: nowrap;
       }
     }
   }
