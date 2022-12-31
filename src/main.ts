@@ -7,6 +7,7 @@ import App from './App.vue'
 import router from '@/router/index'
 import '@/style/global.scss'
 import '@/style/reset.scss'
+import 'virtual:svg-icons-register'
 
 const app = createApp(App)
 app.use(router).use(createPinia()).mount('#app')
