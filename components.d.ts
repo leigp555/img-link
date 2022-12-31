@@ -19,7 +19,9 @@ declare module '@vue/runtime-core' {
     APopconfirm: typeof import('ant-design-vue/es')['Popconfirm']
     ARow: typeof import('ant-design-vue/es')['Row']
     ASpace: typeof import('ant-design-vue/es')['Space']
+    ASwitch: typeof import('ant-design-vue/es')['Switch']
     AUpload: typeof import('ant-design-vue/es')['Upload']
+    HomeContent: typeof import('./src/components/HomeContent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

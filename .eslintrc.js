@@ -17,8 +17,17 @@ module.exports = {
   },
   plugins: ['vue', '@typescript-eslint'],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    "vue/no-v-model-argument": "off",
+    'no-useless-return':'off',
+    'no-unused-vars':'off',
+    'no-underscore-dangle':0,
+    'prefer-destructuring':'off',
+    'camelcase':'off',
+    'no-unused-expressions':'off',
+    'no-script-url':'off',
+    "import/first":'off',
+    "no-param-reassign":"off",
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
     'import/extensions': 'off',
@@ -27,14 +36,7 @@ module.exports = {
     'vue/no-multiple-template-root': 'off',
     'vue/multi-word-component-names': 'off',
     'no-plusplus': 'off',
-    'vue/comment-directive': 0,
-    'no-param-reassign': [
-      'error',
-      {
-        props: true,
-        ignorePropertyModificationsFor: ['state', 'config']
-      }
-    ]
+    'vue/comment-directive': 0
   },
   settings: {},
   overrides: [

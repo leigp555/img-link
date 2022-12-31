@@ -1,11 +1,7 @@
 <template>
-  <div class="home">Home组件</div>
+  <HomeLayout />
 </template>
 
-<script lang="ts" setup></script>
-
-<style scoped lang="scss">
-.home {
-  color: red;
-}
-</style>
+<script lang="ts" setup>
+import HomeLayout from '@/layout/HomeLayout.vue'
+</script>
