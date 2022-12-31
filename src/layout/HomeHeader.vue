@@ -1,7 +1,7 @@
 <template>
   <nav>
     <section class="logo">
-      <router-link to="/home">IMG.URL</router-link>
+      <router-link to="/">IMG.URL</router-link>
     </section>
     <section class="navbar">
       <div class="navbar-left">
@@ -40,8 +40,10 @@ const checked = ref<boolean>(false)
 </script>
 
 <style scoped lang="scss">
+$nav_height: 64px;
+$router_gap: 30px;
 nav {
-  height: 64px;
+  height: $nav_height;
   position: fixed;
   top: 0;
   right: 0;
@@ -50,7 +52,7 @@ nav {
   background: #fff;
   padding: 9px 120px;
   display: flex;
-  gap: 20px;
+  gap: $router_gap;
   align-items: center;
   > .logo {
     font-size: 1.2em;
@@ -62,6 +64,7 @@ nav {
   }
   > .navbar {
     display: flex;
+    margin-left: $router_gap;
     flex-grow: 10;
     .router-link-exact-active {
       font-weight: 600;
@@ -71,13 +74,13 @@ nav {
       flex-grow: 10;
       flex-wrap: nowrap;
       > a {
-        margin-right: 30px;
+        margin-right: $router_gap;
       }
     }
     > .navbar-right {
       flex-wrap: nowrap;
       > a {
-        margin-left: 30px;
+        margin-left: $router_gap;
         white-space: nowrap;
       }
     }
