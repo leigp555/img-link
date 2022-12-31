@@ -83,6 +83,7 @@
     "vite": "^2.9.9",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-mock": "^2.9.6",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue-jest": "^5.0.0-alpha.7",
     "vue-tsc": "^0.34.12"
   }
