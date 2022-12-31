@@ -29,11 +29,15 @@
         </template>
       </a-switch>
     </section>
+    <section class="header-menu">
+      <menu-outlined />
+    </section>
   </nav>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { MenuOutlined } from '@ant-design/icons-vue'
 import SvgIcon from '@/components/SvgIcon.vue'
 
 const checked = ref<boolean>(false)
@@ -50,10 +54,16 @@ nav {
   left: 0;
   z-index: 1000;
   background: #fff;
-  padding: 9px 120px;
   display: flex;
   gap: $router_gap;
   align-items: center;
+  padding: 9px 120px;
+  @media (max-width: 1000px) {
+    padding: 9px 18px;
+  }
+  @media (max-width: 800px) {
+    justify-content: space-between;
+  }
   > .logo {
     font-size: 1.2em;
     white-space: nowrap;
@@ -69,6 +79,9 @@ nav {
     .router-link-exact-active {
       font-weight: 600;
       color: #1890ff;
+    }
+    @media (max-width: 800px) {
+      display: none;
     }
     > .navbar-left {
       flex-grow: 10;
@@ -86,6 +99,17 @@ nav {
     }
   }
   > .switch-theme {
+    @media (max-width: 800px) {
+      margin-left: auto;
+    }
+  }
+  > .header-menu {
+    align-items: center;
+    font-size: 22px;
+    display: none;
+    @media (max-width: 800px) {
+      display: inline-flex;
+    }
   }
 }
 .switch {
