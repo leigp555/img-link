@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AAvatar: typeof import('ant-design-vue/es')['Avatar']
+    About: typeof import('./src/components/About.vue')['default']
     ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
     ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem']
     AButton: typeof import('ant-design-vue/es')['Button']
@@ -22,9 +23,12 @@ declare module '@vue/runtime-core' {
     ASpace: typeof import('ant-design-vue/es')['Space']
     ASwitch: typeof import('ant-design-vue/es')['Switch']
     AUpload: typeof import('ant-design-vue/es')['Upload']
+    ChangeLog: typeof import('./src/components/ChangeLog.vue')['default']
+    Concat: typeof import('./src/components/Concat.vue')['default']
     HomeContent: typeof import('./src/components/HomeContent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SvgIcon: typeof import('./src/components/SvgIcon.vue')['default']
+    Upload: typeof import('./src/components/Upload.vue')['default']
   }
 }

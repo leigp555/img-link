@@ -41,15 +41,15 @@ onMounted(() => {
     <section class="navbar">
       <!--      左边导航-->
       <div class="navbar-left">
-        <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
-        <router-link to="/concat">Concat</router-link>
+        <router-link to="/upload">图片上传</router-link>
+        <router-link to="/about">关于</router-link>
+        <router-link to="/concat">联系我</router-link>
       </div>
       <!--      右边导航-->
       <div class="navbar-right">
-        <router-link to="/changeLog">ChangeLog</router-link>
-        <router-link to="/apiDocs">API Docs</router-link>
-        <router-link to="/manage">Manage</router-link>
+        <router-link to="/changeLog">版本变更</router-link>
+        <router-link to="/apiDocs">API 文档</router-link>
+        <router-link to="/manage">图片管理</router-link>
         <a-switch v-model:checked="checked" @change="theme_change" class="switch">
           <template #checkedChildren>
             <span class="switch-svg">
@@ -76,7 +76,7 @@ onMounted(() => {
     <section class="login-or-register" ref="login_register_ref">
       <router-link to="/login">登录</router-link>
       <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-      <router-link to="/login">注册</router-link>
+      <router-link to="/register">注册</router-link>
     </section>
   </nav>
 </template>
@@ -84,6 +84,16 @@ onMounted(() => {
 <style scoped lang="scss">
 $nav_height: 64px;
 $router_gap: 30px;
+a {
+  color: #000000d9;
+  &:hover {
+    color: #1890ff;
+  }
+}
+.router-link-exact-active {
+  font-weight: 600;
+  color: #1890ff;
+}
 nav {
   height: $nav_height;
   position: fixed;
@@ -115,10 +125,6 @@ nav {
     display: flex;
     margin-left: $router_gap;
     flex-grow: 10;
-    .router-link-exact-active {
-      font-weight: 600;
-      color: #1890ff;
-    }
     @media (max-width: 800px) {
       display: none;
       justify-self: center;
