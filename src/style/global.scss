@@ -22,11 +22,15 @@
   }
 }
 
-
+body{
+  transition: background,background-color 250ms;
+}
 body.theme-light {
-  --xxx: green;
+  color: #000000d9;
+  --header-bac: #ffffff;
 }
 body.theme-dark {
-  --xxx: red;
+  color: #d3d3d3;
+  --header-bac: #101112;
 }
 

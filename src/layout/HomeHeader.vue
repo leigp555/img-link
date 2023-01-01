@@ -1,46 +1,71 @@
 <template>
   <nav>
+    <!--    导航按钮-->
+    <section class="header-menu">
+      <menu-outlined />
+    </section>
+    <!--    logo-->
     <section class="logo">
       <router-link to="/">IMG.URL</router-link>
     </section>
+    <!--    导航-->
     <section class="navbar">
+      <!--      左边导航-->
       <div class="navbar-left">
         <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
         <router-link to="/concat">Concat</router-link>
       </div>
+      <!--      右边导航-->
       <div class="navbar-right">
         <router-link to="/changeLog">ChangeLog</router-link>
         <router-link to="/apiDocs">API Docs</router-link>
         <router-link to="/manage">Manage</router-link>
+        <a-switch v-model:checked="checked" @change="theme_change" class="switch">
+          <template #checkedChildren>
+            <span class="switch-svg">
+              <SvgIcon name="sun" />
+            </span>
+          </template>
+          <template #unCheckedChildren>
+            <span class="switch-svg">
+              <SvgIcon name="moon" />
+            </span>
+          </template>
+        </a-switch>
       </div>
     </section>
-    <section class="switch-theme">
-      <a-switch v-model:checked="checked" class="switch">
-        <template #checkedChildren>
-          <span class="switch-svg">
-            <SvgIcon name="sun" />
-          </span>
+    <!--    用户头像-->
+    <section class="user-avatar">
+      <a-avatar>
+        <template #icon>
+          <UserOutlined />
         </template>
-        <template #unCheckedChildren>
-          <span class="switch-svg">
-            <SvgIcon name="moon" />
-          </span>
-        </template>
-      </a-switch>
+      </a-avatar>
     </section>
-    <section class="header-menu">
-      <menu-outlined />
+    <!--    登录或注册-->
+    <section class="login-or-register">
+      <router-link to="/login">登录</router-link>
+      <router-link to="/login">注册</router-link>
     </section>
   </nav>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { MenuOutlined } from '@ant-design/icons-vue'
+import { MenuOutlined, UserOutlined } from '@ant-design/icons-vue'
 import SvgIcon from '@/components/SvgIcon.vue'
 
 const checked = ref<boolean>(false)
+const theme_change = (isChecked: boolean) => {
+  if (isChecked) {
+    document.body.classList.remove('theme-light')
+    document.body.classList.add('theme-dark')
+  } else {
+    document.body.classList.remove('theme-dark')
+    document.body.classList.add('theme-light')
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -53,11 +78,12 @@ nav {
   right: 0;
   left: 0;
   z-index: 1000;
-  background: #fff;
+  background: var(--header-bac);
   display: flex;
   gap: $router_gap;
   align-items: center;
   padding: 9px 120px;
+  transition: background 250ms;
   @media (max-width: 1000px) {
     padding: 9px 18px;
   }
@@ -82,6 +108,7 @@ nav {
     }
     @media (max-width: 800px) {
       display: none;
+      justify-self: center;
     }
     > .navbar-left {
       flex-grow: 10;
@@ -93,14 +120,9 @@ nav {
     > .navbar-right {
       flex-wrap: nowrap;
       > a {
-        margin-left: $router_gap;
+        margin-right: $router_gap;
         white-space: nowrap;
       }
-    }
-  }
-  > .switch-theme {
-    @media (max-width: 800px) {
-      margin-left: auto;
     }
   }
   > .header-menu {
@@ -114,7 +136,6 @@ nav {
 }
 .switch {
   background: #151515;
-  padding: 2px;
   .switch-svg {
     display: flex;
     align-items: center;
