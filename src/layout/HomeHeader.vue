@@ -1,3 +1,32 @@
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'
+import { MenuOutlined, UserOutlined } from '@ant-design/icons-vue'
+import SvgIcon from '@/components/SvgIcon.vue'
+import { useProfileStore } from '@/store/user_profile'
+
+const userStore = useProfileStore()
+const avatarRef = ref<HTMLElement>(null)
+const login_register_ref = ref<HTMLElement>(null)
+const checked = ref<boolean>(false)
+const theme_change = (isChecked: boolean) => {
+  if (isChecked) {
+    document.body.classList.remove('theme-light')
+    document.body.classList.add('theme-dark')
+  } else {
+    document.body.classList.remove('theme-dark')
+    document.body.classList.add('theme-light')
+  }
+}
+
+onMounted(() => {
+  if (userStore.login_status) {
+    login_register_ref.value?.classList.add('hidden')
+  } else {
+    avatarRef.value?.classList.add('hidden')
+  }
+})
+</script>
+
 <template>
   <nav>
     <!--    导航按钮-->
@@ -36,7 +65,7 @@
       </div>
     </section>
     <!--    用户头像-->
-    <section class="user-avatar">
+    <section class="user-avatar" ref="avatarRef">
       <a-avatar>
         <template #icon>
           <UserOutlined />
@@ -44,29 +73,13 @@
       </a-avatar>
     </section>
     <!--    登录或注册-->
-    <section class="login-or-register">
+    <section class="login-or-register" ref="login_register_ref">
       <router-link to="/login">登录</router-link>
+      <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
       <router-link to="/login">注册</router-link>
     </section>
   </nav>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { MenuOutlined, UserOutlined } from '@ant-design/icons-vue'
-import SvgIcon from '@/components/SvgIcon.vue'
-
-const checked = ref<boolean>(false)
-const theme_change = (isChecked: boolean) => {
-  if (isChecked) {
-    document.body.classList.remove('theme-light')
-    document.body.classList.add('theme-dark')
-  } else {
-    document.body.classList.remove('theme-dark')
-    document.body.classList.add('theme-light')
-  }
-}
-</script>
 
 <style scoped lang="scss">
 $nav_height: 64px;
@@ -133,9 +146,21 @@ nav {
       display: inline-flex;
     }
   }
+  > .user-avatar {
+    cursor: pointer;
+    &.hidden {
+      display: none;
+    }
+  }
+  > .login-or-register {
+    &.hidden {
+      display: none;
+    }
+  }
 }
 .switch {
   background: #151515;
+  outline: 2px solid #ffffff;
   .switch-svg {
     display: flex;
     align-items: center;
