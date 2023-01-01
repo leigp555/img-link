@@ -41,13 +41,13 @@ onMounted(() => {
     <section class="navbar">
       <!--      左边导航-->
       <div class="navbar-left">
-        <router-link to="/upload">图片上传</router-link>
-        <router-link to="/about">关于</router-link>
-        <router-link to="/concat">联系我</router-link>
+        <router-link to="/home/upload">图片上传</router-link>
+        <router-link to="/home/about">关于</router-link>
+        <router-link to="/home/concat">联系我</router-link>
       </div>
       <!--      右边导航-->
       <div class="navbar-right">
-        <router-link to="/changeLog">版本变更</router-link>
+        <router-link to="/home/changeLog">版本变更</router-link>
         <router-link to="/apiDocs">API 文档</router-link>
         <router-link to="/manage">图片管理</router-link>
         <a-switch v-model:checked="checked" @change="theme_change" class="switch">
@@ -85,7 +85,7 @@ onMounted(() => {
 $nav_height: 64px;
 $router_gap: 30px;
 a {
-  color: #000000d9;
+  color: inherit;
   &:hover {
     color: #1890ff;
   }
@@ -114,7 +114,7 @@ nav {
     justify-content: space-between;
   }
   > .logo {
-    font-size: 1.2em;
+    font-size: 1.5em;
     white-space: nowrap;
     a {
       color: inherit;
