@@ -9,10 +9,11 @@
   right: 0;
   left: 0;
   height: 64px;
-  background: #f5f5f5;
+  background: var(--footer-bac);
   padding-right: 120px;
   padding-left: 120px;
   display: flex;
   align-items: center;
+  transition: background 250ms;
 }
 </style>

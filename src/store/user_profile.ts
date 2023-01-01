@@ -13,7 +13,7 @@ export const useProfileStore = defineStore('user_profile', {
       username: '',
       email: '',
       password: '',
-      login_status: true
+      login_status: false
     }
   },
   getters: {},

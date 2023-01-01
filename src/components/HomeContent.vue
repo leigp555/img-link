@@ -14,10 +14,5 @@
 .home {
   height: 800px;
   padding: 50px 120px;
-  background: linear-gradient(
-    180deg,
-    rgba(248, 249, 252, 1) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
 }
 </style>
