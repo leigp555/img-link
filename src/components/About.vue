@@ -34,8 +34,7 @@
       <a-alert type="info" class="alert">
         <template #message>
           <div class="alert" style="display: flex; justify-content: center">
-            滥用投诉 122974945@qq.com 联系管理员 122974945@qq.com 电报组
-            122974945@qq.com
+            滥用投诉 122974945@qq.com 联系管理员 122974945@qq.com
           </div>
         </template>
       </a-alert>
