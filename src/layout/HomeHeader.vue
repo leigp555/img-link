@@ -101,12 +101,13 @@ nav {
   right: 0;
   left: 0;
   z-index: 1000;
+  box-shadow: var(--header-shadow);
   background: var(--header-bac);
   display: flex;
   gap: $router_gap;
   align-items: center;
   padding: 9px 120px;
-  transition: background 250ms;
+  transition: all 250ms;
   @media (max-width: 1000px) {
     padding: 9px 18px;
   }

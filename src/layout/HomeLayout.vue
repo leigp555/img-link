@@ -12,9 +12,6 @@ import Footer from '@/layout/HomeFooter.vue'
 
 <style lang="scss" scoped>
 .content {
-  padding-top: 100px;
-  margin-bottom: 100px;
-  padding-left: 120px;
-  padding-right: 120px;
+  padding: 100px 120px;
 }
 </style>

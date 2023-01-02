@@ -42,6 +42,7 @@ declare module '@vue/runtime-core' {
     ChangeLog: typeof import('./src/components/ChangeLog.vue')['default']
     Concat: typeof import('./src/components/Concat.vue')['default']
     HomeContent: typeof import('./src/components/HomeContent.vue')['default']
+    Policy: typeof import('./src/components/Policy.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SvgIcon: typeof import('./src/components/SvgIcon.vue')['default']

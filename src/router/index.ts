@@ -28,6 +28,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'changeLog',
         name: 'ChangeLog',
         component: () => import('@/components/ChangeLog.vue')
+      },
+      {
+        path: '/privacy-policy',
+        name: 'Policy',
+        component: () => import('@/components/Policy.vue')
       }
     ]
   },

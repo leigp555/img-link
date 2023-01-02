@@ -3,8 +3,9 @@
     <span>Copyright &copy;2023 </span>
     <a href="https://lgp.asia/">lgp.asia.</a>
     <span>All rights reserved. </span>
-    <a href="https://sm.ms/terms-of-use/" title="TOS">Terms of Use</a> -
-    <a href="https://sm.ms/privacy-policy/" title="Privacy Policy">Privacy Policy</a>
+    <router-link to="/privacy-policy">Terms of Use</router-link>
+    -
+    <router-link to="/privacy-policy">Privacy Policy</router-link>
   </section>
 </template>
 
