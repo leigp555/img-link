@@ -14,7 +14,11 @@
           class="animate__animated animate__fadeInLeft"
           :rules="[{ required: true, message: 'Please input your username!' }]"
         >
-          <a-input v-model:value="formState.username" placeholder="用户名" />
+          <a-input
+            v-model:value="formState.username"
+            size="large"
+            placeholder="用户名"
+          />
         </a-form-item>
 
         <a-form-item
@@ -22,7 +26,11 @@
           class="animate__animated animate__fadeInLeft"
           :rules="[{ required: true, message: 'Please input your password!' }]"
         >
-          <a-input-password v-model:value="formState.password" placeholder="密码" />
+          <a-input-password
+            v-model:value="formState.password"
+            size="large"
+            placeholder="密码"
+          />
         </a-form-item>
         <a-form-item name="remember" class="animate__animated animate__fadeInLeft">
           <div class="action">
@@ -92,14 +100,8 @@ const onFinishFailed = (errorInfo: any) => {
 </style>
 
 <style lang="scss">
-.ant-form-item-control-input,
-.ant-form-item-control-input-content,
-.ant-input-password {
-  height: 40px;
-}
 .ant-input,
 .ant-input-password {
-  height: 100%;
   background: var(--input-color);
   svg {
     fill: var(--font-color);
