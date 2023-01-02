@@ -2,9 +2,11 @@
   <div class="policy">
     <p class="title">隐私协议</p>
     <div class="policy-body">
-      <h2>Privacy Policy</h2>
+      <p class="description">Privacy Policy</p>
       <p>Your Privacy Rights – Effective Jan 3, 2023</p>
-      <h2>Information we collect and the purposes for which we use it</h2>
+      <p class="description">
+        Information we collect and the purposes for which we use it
+      </p>
       <p>Automatically collected information</p>
       <p>
         Our servers automatically collect the following information regarding devices
@@ -50,7 +52,7 @@
         practice and to know your choices about not having this
       </p>
 
-      <h2>Information you choose to give us</h2>
+      <p class="description">Information you choose to give us</p>
       <p>
         When you sign in with a username, we handle it in the same way as an
         automatically collected username except that if you don’t allow cookies, you
@@ -79,7 +81,7 @@
         email address or any other personal information; the process is explained below.
       </p>
 
-      <h2>Information you post</h2>
+      <p class="description">Information you post</p>
       <p>
         IMG.URL does not “collect” the stuff you post: images, comments, messages, etc.,
         and – with respect to persons in the EEA – does not “process” or determine any
@@ -98,7 +100,7 @@
         messages are ever completely hidden from public view. We may monitor user
         messaging.
       </p>
-      <h2>Accessing, correcting, and limiting use of your data</h2>
+      <p class="description">Accessing, correcting, and limiting use of your data</p>
       <p>
         Because we don’t collect information about the identity of our users and don’t
         receive any information from third parties enabling us to identify our users, we
@@ -110,7 +112,7 @@
         backup and/or archival copies of information prior to your corrections,
         amendments, or deletions.
       </p>
-      <h2>Data Protection</h2>
+      <p class="description">Data Protection</p>
       <p>
         We take every reasonable precaution to protect the data on our servers from
         loss, misuse, unauthorized access, disclosure, alteration, or destruction,
@@ -118,7 +120,7 @@
         responsible for taking every reasonable precaution on your end to protect any
         unauthorized person from accessing your IMG.URL account.
       </p>
-      <h2>GDPR</h2>
+      <p class="description">GDPR</p>
       <p>
         IMG.URL does not collect “personal data” about, or monitor behavior of, “data
         subjects” as those terms are defined in GDPR Art.4(1), nor do we “target”
@@ -127,14 +129,14 @@
         regarding privacy issues, you can email us at
         <a href="mailto:122974945@qq.com">122974945@qq.com</a>
       </p>
-      <h2>Dispute resolution</h2>
+      <p class="description">Dispute resolution</p>
       <p>
         These terms are governed by California law, excluding its conflicts of law
         principles, and if there is a lawsuit between a user and IMG.URL, jurisdiction
         and venue will lie exclusively in the State where the defendant is located, if
         within the United States, or in Santa Clara County, California otherwise.
       </p>
-      <h2>Changes to this Privacy Policy</h2>
+      <p class="description">Changes to this Privacy Policy</p>
       <p>
         We may revise our privacy policy from time to time by posting the changes here.
         You can determine the date of the most recent changes by looking at the
@@ -156,8 +158,13 @@
     display: flex;
     flex-direction: column;
     word-wrap: break-word;
-    border: 1px solid rgba(0, 0, 0, 0.125);
+    border: 1px solid var(--border-color);
     border-radius: 0.25rem;
+    > .description {
+      font-size: 21px;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
   }
 }
 </style>

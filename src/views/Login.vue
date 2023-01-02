@@ -1,5 +1,5 @@
 <template>
-  <HomeLayout>
+  <Layout>
     <div class="login">
       <p class="title animate__animated animate__bounceInLeft">登录</p>
       <a-form
@@ -49,12 +49,12 @@
         </a-form-item>
       </a-form>
     </div>
-  </HomeLayout>
+  </Layout>
 </template>
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import HomeLayout from '@/layout/HomeLayout.vue'
+import Layout from '@/layout/Layout.vue'
 
 interface FormState {
   username: string

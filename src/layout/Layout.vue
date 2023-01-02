@@ -6,8 +6,8 @@
   <Footer />
 </template>
 <script setup lang="ts">
-import Header from '@/layout/HomeHeader.vue'
-import Footer from '@/layout/HomeFooter.vue'
+import Header from '@/layout/Header.vue'
+import Footer from '@/layout/Footer.vue'
 </script>
 
 <style lang="scss" scoped>

@@ -56,7 +56,7 @@ const fileTip = ref<string>('已选择3个文件')
       margin-right: 4px;
       text-overflow: ellipsis;
       padding: 4px 11px;
-      border: 1px solid #d9d9d9;
+      border: 1px solid var(--border-color);
       border-radius: 2px;
       background: var(--input-color);
       transition: all 250ms;
@@ -87,12 +87,12 @@ const fileTip = ref<string>('已选择3个文件')
 
   > .file-preview {
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     padding: 8px;
     width: 100%;
     margin-bottom: 5px;
     > .file-content {
-      border: 1px dashed #aaa;
+      border: 1px dashed var(--border-color);
       border-radius: 4px;
       height: 100%;
       text-align: center;

@@ -10,7 +10,8 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Home.vue'),
     children: [
       {
-        path: 'upload',
+        path: '',
+        alias: 'upload',
         name: 'Upload',
         component: () => import('@/components/Upload.vue')
       },
