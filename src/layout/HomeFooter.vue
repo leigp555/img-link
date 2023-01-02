@@ -1,5 +1,11 @@
 <template>
-  <section class="footer">footer</section>
+  <section class="footer">
+    <span>Copyright &copy;2023 </span>
+    <a href="https://lgp.asia/">lgp.asia.</a>
+    <span>All rights reserved. </span>
+    <a href="https://sm.ms/terms-of-use/" title="TOS">Terms of Use</a> -
+    <a href="https://sm.ms/privacy-policy/" title="Privacy Policy">Privacy Policy</a>
+  </section>
 </template>
 
 <style lang="scss" scoped>

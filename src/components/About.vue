@@ -55,10 +55,10 @@ import { SmileOutlined, RobotOutlined, FrownOutlined } from '@ant-design/icons-v
   > .content {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 30px;
   }
   .alert {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 2em;
   }
 }
