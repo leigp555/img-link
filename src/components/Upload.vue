@@ -8,6 +8,8 @@ const fileTip = ref<string>('已选择3个文件')
 
 <template>
   <div class="upload">
+    <p class="title">图片上传</p>
+    <p class="subTitle">每张图片最大不能超过5M,每次请求最多上传10张照片</p>
     <div class="file-preview">
       <div class="file-content">
         <div class="file-title">
@@ -38,7 +40,10 @@ const fileTip = ref<string>('已选择3个文件')
 
 <style lang="scss" scoped>
 .upload {
-  padding: 40px 120px;
+  > .title {
+    font-size: 25px;
+    line-height: 1.2;
+  }
   > .action {
     display: flex;
     align-items: center;
@@ -53,7 +58,8 @@ const fileTip = ref<string>('已选择3个文件')
       padding: 4px 11px;
       border: 1px solid #d9d9d9;
       border-radius: 2px;
-      transition: all 0.3s;
+      background: var(--input-color);
+      transition: all 250ms;
       &:hover {
         border-color: #1890ff;
       }
