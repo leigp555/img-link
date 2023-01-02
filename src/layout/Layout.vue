@@ -12,6 +12,6 @@ import Footer from '@/layout/Footer.vue'
 
 <style lang="scss" scoped>
 .content {
-  padding: 100px 120px;
+  padding: 90px 120px;
 }
 </style>

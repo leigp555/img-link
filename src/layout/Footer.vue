@@ -15,6 +15,7 @@
   bottom: 0;
   right: 0;
   left: 0;
+  z-index: 1000;
   height: 64px;
   background: var(--footer-bac);
   padding-right: 120px;
