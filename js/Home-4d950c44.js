@@ -1,0 +1,1 @@
+import{L as a}from"./Layout-bba8c6a2.js";import{d as e,c as s,w as t,o,a as r,r as m}from"./index-c9e87c00.js";import"./default-542f2d13.js";import"./index-f9d4b565.js";import"./wave-858c2d99.js";import"./eagerComputed-1622abef.js";const d=e({__name:"Home",setup:e=>(e,d)=>{const i=m("router-view");return o(),s(a,null,{default:t((()=>[r(i)])),_:1})}});export{d as default};
