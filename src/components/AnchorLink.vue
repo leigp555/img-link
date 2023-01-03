@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs } from 'vue'
 
-const props = withDefaults(
-  defineProps<{ title?: string; href: string; nested?: boolean }>(),
-  {
-    nested: false,
-    title: ''
-  }
-)
+const props = withDefaults(defineProps<{ href: string; nested?: boolean }>(), {
+  nested: false
+})
 const { href } = toRefs(props)
 // 滑动元素
 const onClick = () => {
@@ -17,27 +13,22 @@ const onClick = () => {
 }
 </script>
 <template>
-  <span
+  <div
     @click="onClick"
     class="ui-anchorLink-title"
     :class="{ 'ui-anchorLink-nested': nested }"
-    >{{ title }}</span
   >
+    <slot />
+  </div>
 </template>
 
 <style lang="scss">
 .ui-anchorLink-title {
-  color: #000000d9;
-  font-size: 12px;
   cursor: pointer;
   transition: all 250ms;
-  height: 16px;
-  max-width: 90px;
-  overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
   &.ui-anchorLink-nested {
-    margin-left: 8px;
+    margin-left: 24px;
   }
   &:hover {
     color: #1890ff;

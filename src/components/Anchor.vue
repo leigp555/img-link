@@ -93,7 +93,7 @@ function handle() {
   elInfo.value.forEach((item) => {
     if (
       item.targetOffsetTop! >= scrollDistance - item.targetClientHeight! &&
-      item.targetOffsetTop! <= scrollDistance + 80
+      item.targetOffsetTop! <= scrollDistance + 100
     ) {
       selectItem.value = item
       currentOrder.value = item.order
@@ -130,12 +130,10 @@ onBeforeUnmount(() => {
 
 <style lang="scss">
 .ui-anchor-wrap {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   gap: 7px;
-  padding: 0 15px 0 32px;
   background-color: transparent;
   position: relative;
-  font-size: 12px;
 }
 </style>

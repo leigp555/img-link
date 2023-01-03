@@ -52,6 +52,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SvgIcon: typeof import('./src/components/SvgIcon.vue')['default']
+    Table: typeof import('./src/components/Table.vue')['default']
     Upload: typeof import('./src/components/Upload.vue')['default']
   }
 }
