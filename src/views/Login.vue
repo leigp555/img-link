@@ -80,9 +80,12 @@ const onFinish = (values: any) => {
 const onFinishFailed = (errorInfo: any) => {
   console.log('Failed:', errorInfo)
 }
+
+// github授权
 const githubCode = () => {
   githubLogin()
 }
+// google授权
 const googleToken = () => {
   googleLogin()
 }
@@ -107,48 +110,5 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-.bac-cover {
-  background-image: url('../assets/bac.jpg');
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-position: center center;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .login-wrap {
-    margin: auto;
-    background: white;
-    border-radius: 8px;
-    display: inline-block;
-    .login {
-      min-width: 200px;
-      width: calc(100vw - 110px);
-      max-width: 320px;
-      margin: 40px 40px 20px 40px;
-      overflow: hidden;
-      > .title {
-        font-weight: 600;
-        font-size: 24px;
-      }
-      > .other-way-login {
-        display: flex;
-        gap: 24px;
-        justify-content: center;
-        .svg {
-          font-size: 22px;
-        }
-      }
-      > .login-form {
-        .action {
-          display: flex;
-          justify-content: space-between;
-        }
-      }
-    }
-  }
-}
+@import '../style/login.scss';
 </style>
