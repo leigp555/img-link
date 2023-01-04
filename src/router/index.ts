@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, Router, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, Router, RouteRecordRaw } from 'vue-router'
 
 import Test from '@/views/Test.vue'
 
@@ -65,7 +65,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router: Router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 })
 

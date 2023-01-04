@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-// 如果编辑器提示 path 模块找不到，则可以安装一下 @types/node -> npm i @types/node -D
 import path, { resolve } from 'path'
 import { viteMockServe } from 'vite-plugin-mock'
 import viteCompression from 'vite-plugin-compression'
@@ -32,6 +31,11 @@ export default defineConfig({
     }
   },
   base: './',
+  server: {
+    port: 3000, // 设置服务启动端口号
+    open: false,
+    cors: true // 允许跨域
+  },
   build: {
     minify: 'terser',
     terserOptions: {
