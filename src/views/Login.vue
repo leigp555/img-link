@@ -15,14 +15,22 @@
             name="username"
             :rules="[{ required: true, message: 'Please input your username!' }]"
           >
-            <a-input v-model:value="formState.username" placeholder="用户名" />
+            <a-input
+              v-model:value="formState.username"
+              placeholder="用户名"
+              size="large"
+            />
           </a-form-item>
           <!--密码-->
           <a-form-item
             name="password"
             :rules="[{ required: true, message: 'Please input your password!' }]"
           >
-            <a-input-password v-model:value="formState.password" placeholder="密码" />
+            <a-input-password
+              v-model:value="formState.password"
+              placeholder="密码"
+              size="large"
+            />
           </a-form-item>
           <!--记住密码/忘记密码-->
           <a-form-item name="remember">
@@ -33,7 +41,10 @@
           </a-form-item>
           <!--登录-->
           <a-form-item>
-            <a-button type="primary" html-type="submit" style="width: 100%"
+            <a-button
+              type="primary"
+              html-type="submit"
+              style="width: 100%; height: 40px"
               >登录</a-button
             >
           </a-form-item>

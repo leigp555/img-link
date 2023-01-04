@@ -1,70 +1,144 @@
 <template>
-  <Layout>
-    <div class="login">
-      <p class="title animate__animated animate__bounceInRight">注册</p>
-      <a-form
-        :model="formState"
-        autocomplete="on"
-        @finish="onFinish"
-        @finishFailed="onFinishFailed"
-        class="login-form"
-      >
-        <a-form-item
-          name="username"
-          class="animate__animated animate__fadeInRight"
-          :rules="[{ required: true, message: 'Please input your username!' }]"
+  <section class="bac-cover">
+    <div class="login-wrap">
+      <div class="login">
+        <p class="title animate__animated animate__bounceInLeft">注册</p>
+        <a-form
+          :model="formState"
+          autocomplete="on"
+          @finish="onFinish"
+          @finishFailed="onFinishFailed"
+          class="login-form animate__animated animate__fadeInRight"
         >
-          <a-input
-            v-model:value="formState.username"
-            size="large"
-            placeholder="用户名"
-          />
-        </a-form-item>
-
-        <a-form-item
-          name="password"
-          class="animate__animated animate__fadeInRight"
-          :rules="[{ required: true, message: 'Please input your password!' }]"
-        >
-          <a-input-password
-            v-model:value="formState.password"
-            size="large"
-            placeholder="密码"
-          />
-        </a-form-item>
-        <a-form-item name="remember" class="animate__animated animate__fadeInRight">
-          <div class="action">
-            <a-checkbox
-              v-model:checked="formState.remember"
-              style="color: var(--font-color)"
-              >记住密码</a-checkbox
-            >
-            <router-link to="">忘记密码?</router-link>
-          </div>
-        </a-form-item>
-        <a-form-item class="animate__animated animate__fadeInRight">
-          <a-button type="primary" html-type="submit" style="width: 100%; height: 40px"
-            >Submit</a-button
+          <!--用户名-->
+          <a-form-item
+            name="username"
+            :rules="[{ required: true, message: 'Please input your username!' }]"
           >
-        </a-form-item>
-      </a-form>
+            <a-input
+              v-model:value="formState.username"
+              placeholder="用户名"
+              size="large"
+            />
+          </a-form-item>
+          <!--邮箱-->
+          <a-form-item
+            name="email"
+            :rules="[{ required: true, message: 'Please input your username!' }]"
+          >
+            <a-input v-model:value="formState.email" placeholder="邮箱" size="large" />
+          </a-form-item>
+          <!--邮箱验证码-->
+          <a-form-item
+            name="emailCaptcha"
+            :rules="[{ required: true, message: 'Please input your username!' }]"
+          >
+            <div
+              style="
+                display: flex;
+                gap: 20px;
+                justify-content: space-between;
+                align-items: stretch;
+              "
+            >
+              <a-input
+                v-model:value="formState.emailCaptcha"
+                placeholder="验证码"
+                size="large"
+                style="flex-grow: 10"
+              />
+              <!--<a-button style="align-self: stretch; height: 40px">获取验证码</a-button>-->
+              <a-button style="align-self: stretch; height: 40px">60秒后重发</a-button>
+            </div>
+          </a-form-item>
+          <!--密码-->
+          <a-form-item
+            name="password"
+            :rules="[{ required: true, message: 'Please input your password!' }]"
+          >
+            <a-input-password
+              v-model:value="formState.password"
+              placeholder="密码"
+              size="large"
+            />
+          </a-form-item>
+
+          <!--确认密码-->
+          <a-form-item
+            name="rePassword"
+            :rules="[{ required: true, message: 'Please input your password!' }]"
+          >
+            <a-input-password
+              v-model:value="formState.rePassword"
+              placeholder="确认密码"
+              size="large"
+            />
+          </a-form-item>
+
+          <!--图形验证码-->
+          <a-form-item
+            name="captcha"
+            :rules="[{ required: true, message: 'Please input your username!' }]"
+          >
+            <div
+              style="
+                display: flex;
+                gap: 20px;
+                justify-content: space-between;
+                align-items: stretch;
+              "
+            >
+              <a-input
+                v-model:value="formState.captcha"
+                placeholder="验证码"
+                size="large"
+                style="flex-grow: 10"
+              />
+              <!--<a-button style="align-self: stretch; height: 40px">获取验证码</a-button>-->
+              <a-button style="align-self: stretch; height: 40px">60秒后重发</a-button>
+            </div>
+          </a-form-item>
+          <!--登录-->
+          <a-form-item>
+            <a-button
+              type="primary"
+              html-type="submit"
+              style="width: 100%; height: 40px"
+            >
+              <template #icon><user-add-outlined /></template>
+              注册</a-button
+            >
+          </a-form-item>
+          <a-form-item>
+            <router-link to="/login">已有账号?点击登录</router-link>
+          </a-form-item>
+        </a-form>
+      </div>
     </div>
-  </Layout>
+  </section>
 </template>
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import Layout from '@/layout/Layout.vue'
+import { UserAddOutlined } from '@ant-design/icons-vue'
+import { useRoute } from 'vue-router'
 
+const router = useRoute()
 interface FormState {
   username: string
+  email: string
+  emailCaptcha: string
   password: string
-  remember: boolean
+  rePassword: string
+  captcha: string
 }
 const formState = reactive<FormState>({
   username: '',
+  email: '',
+  emailCaptcha: '',
   password: '',
-  remember: true
+  rePassword: '',
+  captcha: ''
 })
 const onFinish = (values: any) => {
   console.log('Success:', values)
@@ -76,41 +150,5 @@ const onFinishFailed = (errorInfo: any) => {
 </script>
 
 <style scoped lang="scss">
-.login {
-  margin-top: 12vh;
-  width: 30vw;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 60px 40px 40px;
-  box-shadow: var(--login-shadow);
-  overflow: hidden;
-  > .title {
-    font-weight: 600;
-    font-size: 27px;
-  }
-  > .login-form {
-    margin-right: auto;
-    margin-left: auto;
-    .action {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-}
-</style>
-
-<style lang="scss">
-.ant-form-item-control-input,
-.ant-form-item-control-input-content,
-.ant-input-password {
-  height: 40px;
-}
-.ant-input,
-.ant-input-password {
-  height: 100%;
-  background: var(--input-color);
-  svg {
-    fill: var(--font-color);
-  }
-}
+@import '../style/login.scss';
 </style>
