@@ -10,6 +10,7 @@
           @finishFailed="onFinishFailed"
           class="login-form"
         >
+          <!--用户名-->
           <a-form-item
             name="username"
             class="animate__animated animate__fadeInLeft"
@@ -17,7 +18,7 @@
           >
             <a-input v-model:value="formState.username" placeholder="用户名" />
           </a-form-item>
-
+          <!--密码-->
           <a-form-item
             name="password"
             class="animate__animated animate__fadeInLeft"
@@ -25,29 +26,28 @@
           >
             <a-input-password v-model:value="formState.password" placeholder="密码" />
           </a-form-item>
+          <!--记住密码/忘记密码-->
           <a-form-item name="remember" class="animate__animated animate__fadeInLeft">
             <div class="action">
-              <a-checkbox
-                v-model:checked="formState.remember"
-                style="color: var(--font-color)"
-                >记住密码</a-checkbox
-              >
+              <a-checkbox v-model:checked="formState.remember">记住密码</a-checkbox>
               <router-link to="">忘记密码?</router-link>
             </div>
           </a-form-item>
+          <!--登录-->
           <a-form-item class="animate__animated animate__fadeInLeft">
             <a-button type="primary" html-type="submit" style="width: 100%"
               >登录</a-button
             >
           </a-form-item>
         </a-form>
+        <!--其他方式登录-->
         <a-divider style="font-size: 14px">其他登录方式</a-divider>
-        <div style="display: flex; gap: 10px; justify-content: center">
+        <div class="other-way-login">
           <a-button type="text" shape="circle" @click="githubCode">
-            <template #icon><github-outlined style="font-size: 20px" /></template>
+            <template #icon><github-outlined class="svg" /></template>
           </a-button>
           <a-button type="text" shape="circle" @click="googleToken">
-            <template #icon><google-circle-filled style="font-size: 20px" /></template>
+            <template #icon><google-circle-filled class="svg" /></template>
           </a-button>
         </div>
       </div>
@@ -127,17 +127,22 @@ onMounted(() => {
     .login {
       min-width: 200px;
       width: calc(100vw - 110px);
-      max-width: 310px;
+      max-width: 320px;
       margin: 40px 40px 20px 40px;
       overflow: hidden;
-      //width: 200px;
       > .title {
         font-weight: 600;
         font-size: 24px;
       }
+      > .other-way-login {
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        .svg {
+          font-size: 22px;
+        }
+      }
       > .login-form {
-        margin-right: auto;
-        margin-left: auto;
         .action {
           display: flex;
           justify-content: space-between;
