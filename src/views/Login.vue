@@ -8,12 +8,11 @@
           autocomplete="on"
           @finish="onFinish"
           @finishFailed="onFinishFailed"
-          class="login-form"
+          class="login-form animate__animated animate__fadeInLeft"
         >
           <!--用户名-->
           <a-form-item
             name="username"
-            class="animate__animated animate__fadeInLeft"
             :rules="[{ required: true, message: 'Please input your username!' }]"
           >
             <a-input v-model:value="formState.username" placeholder="用户名" />
@@ -21,23 +20,25 @@
           <!--密码-->
           <a-form-item
             name="password"
-            class="animate__animated animate__fadeInLeft"
             :rules="[{ required: true, message: 'Please input your password!' }]"
           >
             <a-input-password v-model:value="formState.password" placeholder="密码" />
           </a-form-item>
           <!--记住密码/忘记密码-->
-          <a-form-item name="remember" class="animate__animated animate__fadeInLeft">
+          <a-form-item name="remember">
             <div class="action">
               <a-checkbox v-model:checked="formState.remember">记住密码</a-checkbox>
               <router-link to="">忘记密码?</router-link>
             </div>
           </a-form-item>
           <!--登录-->
-          <a-form-item class="animate__animated animate__fadeInLeft">
+          <a-form-item>
             <a-button type="primary" html-type="submit" style="width: 100%"
               >登录</a-button
             >
+          </a-form-item>
+          <a-form-item>
+            <router-link to="/register">没有账号?点击注册</router-link>
           </a-form-item>
         </a-form>
         <!--其他方式登录-->
