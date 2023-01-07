@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-import qs from 'qs'
 import { message } from 'ant-design-vue'
 
 // 获取本地Token
@@ -11,7 +10,6 @@ instance.defaults.baseURL = import.meta.env.VITE_BASE_URL
 instance.defaults.timeout = 8000
 instance.defaults.withCredentials = false
 instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
-instance.defaults.transformRequest = (data) => qs.stringify(data)
 instance.defaults.validateStatus = (status) => status >= 200 && status <= 400
 
 // 添加请求拦截器
@@ -54,31 +52,15 @@ instance.interceptors.response.use(
   }
 )
 
-const httpRequest = (url: string, type = 'GET', data = {}) => {
-  return new Promise((resolve, reject) => {
-    const option = {
-      url,
-      method: type
-    } as AxiosRequestConfig
-    if (type.toLowerCase() === 'get') {
-      option.params = data
-    } else {
-      option.data = data
-    }
-    instance(option)
-      .then((res: AxiosResponse) => {
-        if (res.status === 200 || res.status === 201) {
-          resolve(res.data)
-        } else {
-          // 此处可统一处理非200-400之间的状态码
-          Error(res.data.msg)
-          reject(res.data)
-        }
-      })
-      .catch((err) => {
-        reject(err)
-      })
-  })
+// 响应数据类型
+export interface IResponseData<T = any> {
+  code: number
+  msg: string
+  data: T
+}
+
+async function httpRequest<T>(config: AxiosRequestConfig) {
+  return instance.request<IResponseData<T>>(config).then((res) => res.data)
 }
 
 export default httpRequest

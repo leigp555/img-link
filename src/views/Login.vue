@@ -1,3 +1,57 @@
+<script lang="ts" setup>
+import { onMounted, reactive, ref } from 'vue'
+import { GithubOutlined, GoogleCircleFilled } from '@ant-design/icons-vue'
+import { useRoute } from 'vue-router'
+import axios from 'axios'
+import { githubLogin, googleLogin } from '@/utils/login'
+
+const router = useRoute()
+interface FormState {
+  username: string
+  password: string
+  remember: boolean
+}
+const formState = reactive<FormState>({
+  username: '',
+  password: '',
+  remember: true
+})
+const onFinish = (values: any) => {
+  console.log('Success:', values)
+}
+
+const onFinishFailed = (errorInfo: any) => {
+  console.log('Failed:', errorInfo)
+}
+
+// github授权
+const githubCode = () => {
+  githubLogin()
+}
+// google授权
+const googleToken = () => {
+  googleLogin()
+}
+
+onMounted(() => {
+  let code: string = ''
+  try {
+    code = router.query?.code as string
+  } catch (err) {
+    code = ''
+  }
+  if (code) {
+    axios
+      .post('http://localhost:8000/code/back', {
+        code
+      })
+      .then((res) => {
+        console.log(res)
+      })
+  }
+})
+</script>
+
 <template>
   <section class="bac-cover">
     <div class="login-wrap">
@@ -9,6 +63,7 @@
           @finish="onFinish"
           @finishFailed="onFinishFailed"
           class="login-form animate__animated animate__fadeInLeft"
+          ref="formRef"
         >
           <!--用户名-->
           <a-form-item
@@ -66,60 +121,6 @@
     </div>
   </section>
 </template>
-
-<script lang="ts" setup>
-import { onMounted, reactive } from 'vue'
-import { GithubOutlined, GoogleCircleFilled } from '@ant-design/icons-vue'
-import { useRoute } from 'vue-router'
-import axios from 'axios'
-import { githubLogin, googleLogin } from '@/utils/login'
-
-const router = useRoute()
-interface FormState {
-  username: string
-  password: string
-  remember: boolean
-}
-const formState = reactive<FormState>({
-  username: '',
-  password: '',
-  remember: true
-})
-const onFinish = (values: any) => {
-  console.log('Success:', values)
-}
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo)
-}
-
-// github授权
-const githubCode = () => {
-  githubLogin()
-}
-// google授权
-const googleToken = () => {
-  googleLogin()
-}
-
-onMounted(() => {
-  let code: string = ''
-  try {
-    code = router.query?.code as string
-  } catch (err) {
-    code = ''
-  }
-  if (code) {
-    axios
-      .post('http://localhost:8000/code/back', {
-        code
-      })
-      .then((res) => {
-        console.log(res)
-      })
-  }
-})
-</script>
 
 <style scoped lang="scss">
 @import '../style/login.scss';

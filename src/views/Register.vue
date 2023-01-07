@@ -1,3 +1,86 @@
+<script lang="ts" setup>
+import { onMounted, reactive, ref } from 'vue'
+import { UserAddOutlined } from '@ant-design/icons-vue'
+import { useRoute } from 'vue-router'
+import httpRequest from '@/utils/axios'
+
+const router = useRoute()
+// 用户信息
+interface FormState {
+  username: string
+  email: string
+  emailCaptcha: string
+  password: string
+  rePassword: string
+  captcha: string
+}
+// email验证码信息
+interface EmailCaptcha {
+  isGetting: boolean
+  restTime: number
+}
+
+const formState = reactive<FormState>({
+  username: '',
+  email: '',
+  emailCaptcha: '',
+  password: '',
+  rePassword: '',
+  captcha: ''
+})
+
+const emailCaptchaInfo = reactive<EmailCaptcha>({
+  isGetting: false,
+  restTime: 60
+})
+// 图形验证码的数据
+const captchaImg = ref<string>('')
+
+// 获取email验证码
+const getEmailCaptcha = () => {
+  emailCaptchaInfo.isGetting = true
+  const id = setInterval(() => {
+    if (emailCaptchaInfo.restTime <= 0) {
+      window.clearInterval(id)
+      emailCaptchaInfo.isGetting = false
+      emailCaptchaInfo.restTime = 60
+    }
+    emailCaptchaInfo.restTime -= 1
+  }, 1000)
+  // 请求服务端发送验证码
+  httpRequest({
+    url: 'v1/api/email/captcha',
+    method: 'POST',
+    data: { email: formState.email }
+  }).then((res) => {
+    console.log(res)
+  })
+}
+
+// 获取图片验证码
+
+const getCaptchaImg = () => {
+  httpRequest<{ captchaImg: string; captchaId: string }>({
+    url: 'v1/api/captcha'
+  }).then((res) => {
+    captchaImg.value = res.data.captchaImg
+  })
+}
+onMounted(() => {
+  // 获取图形验证码
+  getCaptchaImg()
+})
+
+// 表单提交的回调
+const onFinish = (values: any) => {
+  console.log('Success:', values)
+}
+// 表单提交失败的回调
+const onFinishFailed = (errorInfo: any) => {
+  console.log('Failed:', errorInfo)
+}
+</script>
+
 <template>
   <section class="bac-cover">
     <div class="login-wrap">
@@ -47,8 +130,12 @@
                 size="large"
                 style="flex-grow: 10"
               />
-              <!--<a-button style="align-self: stretch; height: 40px">获取验证码</a-button>-->
-              <a-button style="align-self: stretch; height: 40px">60秒后重发</a-button>
+              <a-button v-if="emailCaptchaInfo.isGetting" style="height: 40px">
+                {{ emailCaptchaInfo.restTime }}秒后重发
+              </a-button>
+              <a-button v-else style="height: 40px" @click="getEmailCaptcha">
+                获取验证码
+              </a-button>
             </div>
           </a-form-item>
           <!--密码-->
@@ -94,8 +181,19 @@
                 size="large"
                 style="flex-grow: 10"
               />
-              <!--<a-button style="align-self: stretch; height: 40px">获取验证码</a-button>-->
-              <a-button style="align-self: stretch; height: 40px">60秒后重发</a-button>
+              <button
+                style="
+                  border: none;
+                  padding: 0;
+                  outline: none;
+                  margin: 0;
+                  display: inline-block;
+                  flex-shrink: 0;
+                  width: 100px;
+                "
+              >
+                <img :src="captchaImg" />
+              </button>
             </div>
           </a-form-item>
           <!--登录-->
@@ -117,37 +215,6 @@
     </div>
   </section>
 </template>
-
-<script lang="ts" setup>
-import { reactive } from 'vue'
-import { UserAddOutlined } from '@ant-design/icons-vue'
-import { useRoute } from 'vue-router'
-
-const router = useRoute()
-interface FormState {
-  username: string
-  email: string
-  emailCaptcha: string
-  password: string
-  rePassword: string
-  captcha: string
-}
-const formState = reactive<FormState>({
-  username: '',
-  email: '',
-  emailCaptcha: '',
-  password: '',
-  rePassword: '',
-  captcha: ''
-})
-const onFinish = (values: any) => {
-  console.log('Success:', values)
-}
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo)
-}
-</script>
 
 <style scoped lang="scss">
 @import '../style/login.scss';
