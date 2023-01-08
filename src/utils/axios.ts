@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-import { message } from 'ant-design-vue'
+import { alert } from '@/components/Message'
 
 // 获取本地Token
 const getToken: () => string = () => window.localStorage.getItem('_AUTH_TOKEN') || ''
@@ -10,7 +10,7 @@ instance.defaults.baseURL = import.meta.env.VITE_BASE_URL
 instance.defaults.timeout = 8000
 instance.defaults.withCredentials = false
 instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
-instance.defaults.validateStatus = (status) => status >= 200 && status <= 400
+instance.defaults.validateStatus = (status) => status >= 200 && status < 400
 
 // 添加请求拦截器
 instance.interceptors.request.use(
@@ -31,28 +31,28 @@ instance.interceptors.response.use(
   (error) => {
     if (!window.navigator.onLine) {
       // 断网处理比如跳转到断网页面
-      message.error('网络异常，请检查网络').then()
+      alert.error('网络异常，请检查网络')
       return
     }
     if (!error.response) {
-      message.error('系统繁忙，请稍后再试').then()
+      alert.error('系统繁忙，请稍后再试')
       return
     }
     // 统一处理400以上的状态码
     if (error.response.status === 401) {
-      message.error('用户未认证').then()
+      alert.error('用户未认证')
       return
     }
     if (error.response.status === 403) {
-      message.error('token过期了').then()
+      alert.error('token过期了')
       return
     }
     if (error.response.status === 404) {
-      message.error('访问内容不存在').then()
+      alert.error('访问内容不存在')
       return
     }
     if (error.response.status === 500) {
-      message.error('系统繁忙，请稍后再试').then()
+      alert.error('系统繁忙，请稍后再试')
       return
     }
     // 除上面的错误状态码统一处理外，其余单独处理

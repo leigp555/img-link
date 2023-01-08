@@ -81,7 +81,7 @@ const getCaptchaImg = () => {
       formState.captchaId = res.data.captchaId
     })
     .catch((err) => {
-      alert.error('验证码获取失败,请重试')
+      alert.error('图形验证码获取失败,请重试')
     })
 }
 const changeCaptcha = () => {
