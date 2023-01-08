@@ -32,22 +32,30 @@ instance.interceptors.response.use(
     if (!window.navigator.onLine) {
       // 断网处理比如跳转到断网页面
       message.error('网络异常，请检查网络').then()
-      return Promise.reject(error)
+      return
     }
     if (!error.response) {
       message.error('系统繁忙，请稍后再试').then()
-      return Promise.reject(error)
+      return
     }
     // 统一处理400以上的状态码
     if (error.response.status === 401) {
       message.error('用户未认证').then()
-    } else if (error.response.status === 403) {
-      message.error('token过期了').then()
-    } else if (error.response.status === 404) {
-      message.error('访问内容不存在').then()
-    } else if (error.response.status === 500) {
-      message.error('系统繁忙，请稍后再试').then()
+      return
     }
+    if (error.response.status === 403) {
+      message.error('token过期了').then()
+      return
+    }
+    if (error.response.status === 404) {
+      message.error('访问内容不存在').then()
+      return
+    }
+    if (error.response.status === 500) {
+      message.error('系统繁忙，请稍后再试').then()
+      return
+    }
+    // 除上面的错误状态码统一处理外，其余单独处理
     return Promise.reject(error)
   }
 )

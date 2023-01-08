@@ -18,6 +18,7 @@ declare module '@vue/runtime-core' {
     AImage: typeof import('ant-design-vue/es')['Image']
     AInput: typeof import('ant-design-vue/es')['Input']
     AInputPassword: typeof import('ant-design-vue/es')['InputPassword']
+    Alert: typeof import('./src/components/Alert.vue')['default']
     Anchor: typeof import('./src/components/Anchor.vue')['default']
     AnchorLink: typeof import('./src/components/AnchorLink.vue')['default']
     ASwitch: typeof import('ant-design-vue/es')['Switch']

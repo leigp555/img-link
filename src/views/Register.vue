@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive } from 'vue'
 import { UserAddOutlined } from '@ant-design/icons-vue'
 import { useRoute } from 'vue-router'
+import { alert } from '@/components/Message'
 import httpRequest from '@/utils/axios'
 
 const router = useRoute()
@@ -11,8 +12,9 @@ interface FormState {
   email: string
   emailCaptcha: string
   password: string
-  rePassword: string
+  checkPassword: string
   captcha: string
+  captchaId: string
 }
 // email验证码信息
 interface EmailCaptcha {
@@ -25,16 +27,21 @@ const formState = reactive<FormState>({
   email: '',
   emailCaptcha: '',
   password: '',
-  rePassword: '',
-  captcha: ''
+  checkPassword: '',
+  captcha: '',
+  captchaId: ''
 })
 
 const emailCaptchaInfo = reactive<EmailCaptcha>({
   isGetting: false,
   restTime: 60
 })
+
 // 图形验证码的数据
-const captchaImg = ref<string>('')
+const captchaImg = reactive<{
+  imgUrl: string
+  imgId: string
+}>({ imgUrl: '', imgId: '' })
 
 // 获取email验证码
 const getEmailCaptcha = () => {
@@ -52,19 +59,33 @@ const getEmailCaptcha = () => {
     url: 'v1/api/email/captcha',
     method: 'POST',
     data: { email: formState.email }
-  }).then((res) => {
-    console.log(res)
   })
+    .then((res) => {
+      console.log(res)
+      alert.success('验证码已发送')
+    })
+    .catch((err) => {
+      alert.error('验证码未发送')
+      console.log(err)
+    })
 }
 
 // 获取图片验证码
-
 const getCaptchaImg = () => {
   httpRequest<{ captchaImg: string; captchaId: string }>({
     url: 'v1/api/captcha'
-  }).then((res) => {
-    captchaImg.value = res.data.captchaImg
   })
+    .then((res) => {
+      captchaImg.imgUrl = res.data.captchaImg
+      captchaImg.imgId = res.data.captchaId
+      formState.captchaId = res.data.captchaId
+    })
+    .catch((err) => {
+      alert.error('验证码获取失败,请重试')
+    })
+}
+const changeCaptcha = () => {
+  getCaptchaImg()
 }
 onMounted(() => {
   // 获取图形验证码
@@ -72,8 +93,8 @@ onMounted(() => {
 })
 
 // 表单提交的回调
-const onFinish = (values: any) => {
-  console.log('Success:', values)
+const onFinish = () => {
+  console.log('Success:', formState)
 }
 // 表单提交失败的回调
 const onFinishFailed = (errorInfo: any) => {
@@ -181,19 +202,12 @@ const onFinishFailed = (errorInfo: any) => {
                 size="large"
                 style="flex-grow: 10"
               />
-              <button
-                style="
-                  border: none;
-                  padding: 0;
-                  outline: none;
-                  margin: 0;
-                  display: inline-block;
-                  flex-shrink: 0;
-                  width: 100px;
-                "
+              <div
+                style="flex-shrink: 0; width: 100px; cursor: pointer"
+                @click="changeCaptcha"
               >
-                <img :src="captchaImg" />
-              </button>
+                <img :src="captchaImg.imgUrl" alt="captcha" />
+              </div>
             </div>
           </a-form-item>
           <!--登录-->

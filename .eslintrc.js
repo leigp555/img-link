@@ -36,7 +36,8 @@ module.exports = {
     'vue/no-multiple-template-root': 'off',
     'vue/multi-word-component-names': 'off',
     'no-plusplus': 'off',
-    'vue/comment-directive': 0
+    'vue/comment-directive': 0,
+    "consistent-return":"off"
   },
   settings: {},
   overrides: [
