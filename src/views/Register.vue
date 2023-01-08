@@ -66,7 +66,6 @@ const getEmailCaptcha = () => {
     })
     .catch((err) => {
       alert.error('验证码未发送')
-      console.log(err)
     })
 }
 
@@ -112,12 +111,13 @@ const onFinishFailed = (errorInfo: any) => {
           autocomplete="on"
           @finish="onFinish"
           @finishFailed="onFinishFailed"
-          class="login-form animate__animated animate__fadeInRight"
+          class="login-form"
         >
           <!--用户名-->
           <a-form-item
             name="username"
             :rules="[{ required: true, message: 'Please input your username!' }]"
+            class="username animate__animated animate__fadeInRight"
           >
             <a-input
               v-model:value="formState.username"
@@ -129,12 +129,14 @@ const onFinishFailed = (errorInfo: any) => {
           <a-form-item
             name="email"
             :rules="[{ required: true, message: 'Please input your username!' }]"
+            class="email animate__animated animate__fadeInRight"
           >
             <a-input v-model:value="formState.email" placeholder="邮箱" size="large" />
           </a-form-item>
           <!--邮箱验证码-->
           <a-form-item
             name="emailCaptcha"
+            class="emailCaptcha animate__animated animate__fadeInRight"
             :rules="[{ required: true, message: 'Please input your username!' }]"
           >
             <div
@@ -162,6 +164,7 @@ const onFinishFailed = (errorInfo: any) => {
           <!--密码-->
           <a-form-item
             name="password"
+            class="password animate__animated animate__fadeInRight"
             :rules="[{ required: true, message: 'Please input your password!' }]"
           >
             <a-input-password
@@ -173,11 +176,12 @@ const onFinishFailed = (errorInfo: any) => {
 
           <!--确认密码-->
           <a-form-item
-            name="rePassword"
+            name="checkPassword"
+            class="checkPassword animate__animated animate__fadeInRight"
             :rules="[{ required: true, message: 'Please input your password!' }]"
           >
             <a-input-password
-              v-model:value="formState.rePassword"
+              v-model:value="formState.checkPassword"
               placeholder="确认密码"
               size="large"
             />
@@ -186,6 +190,7 @@ const onFinishFailed = (errorInfo: any) => {
           <!--图形验证码-->
           <a-form-item
             name="captcha"
+            class="captcha animate__animated animate__fadeInRight"
             :rules="[{ required: true, message: 'Please input your username!' }]"
           >
             <div
@@ -211,7 +216,7 @@ const onFinishFailed = (errorInfo: any) => {
             </div>
           </a-form-item>
           <!--登录-->
-          <a-form-item>
+          <a-form-item class="loginButton animate__animated animate__fadeInRight">
             <a-button
               type="primary"
               html-type="submit"
@@ -221,7 +226,7 @@ const onFinishFailed = (errorInfo: any) => {
               注册</a-button
             >
           </a-form-item>
-          <a-form-item>
+          <a-form-item class="goLogin animate__animated animate__fadeInRight">
             <router-link to="/login">已有账号?点击登录</router-link>
           </a-form-item>
         </a-form>
@@ -232,4 +237,29 @@ const onFinishFailed = (errorInfo: any) => {
 
 <style scoped lang="scss">
 @import '../style/login.scss';
+
+.username.animate__animated.animate__fadeInRight {
+  --animate-duration: 0.5s;
+}
+.email.animate__animated.animate__fadeInRight {
+  --animate-duration: 0.6s;
+}
+.emailCaptcha.animate__animated.animate__fadeInRight {
+  --animate-duration: 0.7s;
+}
+.password.animate__animated.animate__fadeInRight {
+  --animate-duration: 0.8s;
+}
+.checkPassword.animate__animated.animate__fadeInRight {
+  --animate-duration: 0.9s;
+}
+.captcha.animate__animated.animate__fadeInRight {
+  --animate-duration: 1s;
+}
+.loginButton.animate__animated.animate__fadeInRight {
+  --animate-duration: 1.1s;
+}
+.goLogin.animate__animated.animate__fadeInRight {
+  --animate-duration: 1.2s;
+}
 </style>
