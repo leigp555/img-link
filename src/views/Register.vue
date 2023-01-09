@@ -43,8 +43,67 @@ const captchaImg = reactive<{
   imgId: string
 }>({ imgUrl: '../assets/captcha.png', imgId: '' })
 
+// 数据验证
+const validate = reactive({
+  username: [
+    { required: true, message: '请填写用户名' },
+    {
+      pattern: /^[0-9A-Za-z_@/.]{3,10}$/,
+      message: '用户名格式为3-10位(含数字、字母、下划线、@、.)',
+      trigger: 'blur'
+    }
+  ],
+  email: [
+    { required: true, message: '请填写邮箱地址' },
+    {
+      pattern: /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
+      message: '邮箱格式不正确',
+      trigger: 'blur'
+    }
+  ],
+  emailCaptcha: [
+    { required: true, message: '请填写邮箱验证码' },
+    {
+      pattern: /^\d{6}$/,
+      message: '验证码错误',
+      trigger: 'blur'
+    }
+  ],
+  password: [
+    { required: true, message: '请填写密码' },
+    {
+      pattern: /^[a-zA-Z0-9_]{6,16}$/,
+      message: '密码格式为6到16位(含字母、数字、下划线)',
+      trigger: 'blur'
+    }
+  ],
+  checkPassword: [
+    { required: true, message: '请确认密码' },
+    {
+      pattern: /^[0-9A-Za-z_@/.]{3,20}$/,
+      message: '两次输入不一致',
+      trigger: 'blur'
+    }
+  ],
+  captcha: [
+    { required: true, message: '请填写图形验证码' },
+    {
+      pattern: /^\d{4}$/,
+      message: '验证码不正确',
+      trigger: 'blur'
+    }
+  ]
+})
+
 // 获取email验证码
 const getEmailCaptcha = () => {
+  if (
+    !formState.email ||
+    !(validate.email[1].pattern as RegExp).test(formState.email)
+  ) {
+    alert.error('请输入正确的邮箱')
+    return
+  }
   emailCaptchaInfo.isGetting = true
   const id = setInterval(() => {
     if (emailCaptchaInfo.restTime <= 0) {
@@ -116,7 +175,7 @@ const onFinishFailed = (errorInfo: any) => {
           <!--用户名-->
           <a-form-item
             name="username"
-            :rules="[{ required: true, message: 'Please input your username!' }]"
+            :rules="validate.username"
             class="username animate__animated animate__fadeInRight"
           >
             <a-input
@@ -128,7 +187,7 @@ const onFinishFailed = (errorInfo: any) => {
           <!--邮箱-->
           <a-form-item
             name="email"
-            :rules="[{ required: true, message: 'Please input your username!' }]"
+            :rules="validate.email"
             class="email animate__animated animate__fadeInRight"
           >
             <a-input v-model:value="formState.email" placeholder="邮箱" size="large" />
@@ -137,7 +196,7 @@ const onFinishFailed = (errorInfo: any) => {
           <a-form-item
             name="emailCaptcha"
             class="emailCaptcha animate__animated animate__fadeInRight"
-            :rules="[{ required: true, message: 'Please input your username!' }]"
+            :rules="validate.emailCaptcha"
           >
             <div
               style="
@@ -165,7 +224,7 @@ const onFinishFailed = (errorInfo: any) => {
           <a-form-item
             name="password"
             class="password animate__animated animate__fadeInRight"
-            :rules="[{ required: true, message: 'Please input your password!' }]"
+            :rules="validate.password"
           >
             <a-input-password
               v-model:value="formState.password"
@@ -178,7 +237,7 @@ const onFinishFailed = (errorInfo: any) => {
           <a-form-item
             name="checkPassword"
             class="checkPassword animate__animated animate__fadeInRight"
-            :rules="[{ required: true, message: 'Please input your password!' }]"
+            :rules="validate.checkPassword"
           >
             <a-input-password
               v-model:value="formState.checkPassword"
@@ -191,7 +250,7 @@ const onFinishFailed = (errorInfo: any) => {
           <a-form-item
             name="captcha"
             class="captcha animate__animated animate__fadeInRight"
-            :rules="[{ required: true, message: 'Please input your username!' }]"
+            :rules="validate.captcha"
           >
             <div
               style="
@@ -218,7 +277,7 @@ const onFinishFailed = (errorInfo: any) => {
                 "
                 @click="changeCaptcha"
               >
-                <img :src="captchaImg.imgUrl" alt="captcha" />
+                <img :src="captchaImg.imgUrl" alt="验证码" />
               </div>
             </div>
           </a-form-item>
