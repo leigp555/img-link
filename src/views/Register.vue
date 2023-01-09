@@ -1,12 +1,13 @@
 <script lang="ts" setup>
-import { computed, onMounted, reactive, watchEffect } from 'vue'
+import { onMounted, reactive } from 'vue'
 import { UserAddOutlined } from '@ant-design/icons-vue'
 import type { Rule } from 'ant-design-vue/es/form'
-import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { alert } from '@/components/Message'
 import httpRequest from '@/utils/axios'
 
-const router = useRoute()
+const router = useRouter()
+
 // 用户信息
 interface FormState {
   username: string
@@ -121,7 +122,7 @@ const getEmailCaptcha = () => {
   }, 1000)
   // 请求服务端发送验证码
   httpRequest({
-    url: 'v1/api/email/captcha',
+    url: 'email/captcha',
     method: 'POST',
     data: { email: formState.email }
   })
@@ -136,14 +137,14 @@ const getEmailCaptcha = () => {
 // 获取图片验证码
 const getCaptchaImg = () => {
   httpRequest<{ captchaImg: string; captchaId: string }>({
-    url: 'v1/api/captcha'
+    url: 'captcha'
   })
     .then((res) => {
       captchaImg.imgUrl = res.data.captchaImg
       captchaImg.imgId = res.data.captchaId
       formState.captchaId = res.data.captchaId
     })
-    .catch((err) => {
+    .catch(() => {
       alert.error('图形验证码获取失败,请重试')
     })
 }
@@ -157,11 +158,22 @@ onMounted(() => {
 
 // 表单提交的回调
 const onFinish = () => {
-  console.log('Success:', formState)
+  httpRequest({
+    url: 'user/register',
+    method: 'POST',
+    data: formState
+  })
+    .then(() => {
+      alert.success('注册成功')
+      router.push('/login')
+    })
+    .catch((err) => {
+      alert.error(err.errors.body)
+    })
 }
 // 表单提交失败的回调
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo)
+const onFinishFailed = () => {
+  alert.error('表单提交错误,请输入正确的信息')
 }
 </script>
 

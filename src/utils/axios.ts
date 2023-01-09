@@ -56,7 +56,7 @@ instance.interceptors.response.use(
       return
     }
     // 除上面的错误状态码统一处理外，其余单独处理
-    return Promise.reject(error)
+    return Promise.reject(error.response.data)
   }
 )
 
