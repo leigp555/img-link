@@ -41,7 +41,7 @@ const emailCaptchaInfo = reactive<EmailCaptcha>({
 const captchaImg = reactive<{
   imgUrl: string
   imgId: string
-}>({ imgUrl: '', imgId: '' })
+}>({ imgUrl: '../assets/captcha.png', imgId: '' })
 
 // 获取email验证码
 const getEmailCaptcha = () => {
@@ -203,12 +203,19 @@ const onFinishFailed = (errorInfo: any) => {
             >
               <a-input
                 v-model:value="formState.captcha"
-                placeholder="验证码"
+                placeholder="图形验证码"
                 size="large"
                 style="flex-grow: 10"
               />
               <div
-                style="flex-shrink: 0; width: 100px; cursor: pointer"
+                style="
+                  flex-shrink: 0;
+                  width: 100px;
+                  height: 40px;
+                  display: flex;
+                  align-items: center;
+                  cursor: pointer;
+                "
                 @click="changeCaptcha"
               >
                 <img :src="captchaImg.imgUrl" alt="captcha" />
