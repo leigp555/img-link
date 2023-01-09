@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { onMounted, reactive } from 'vue'
+import { computed, onMounted, reactive, watchEffect } from 'vue'
 import { UserAddOutlined } from '@ant-design/icons-vue'
+import type { Rule } from 'ant-design-vue/es/form'
 import { useRoute } from 'vue-router'
 import { alert } from '@/components/Message'
 import httpRequest from '@/utils/axios'
@@ -41,7 +42,7 @@ const emailCaptchaInfo = reactive<EmailCaptcha>({
 const captchaImg = reactive<{
   imgUrl: string
   imgId: string
-}>({ imgUrl: '../assets/captcha.png', imgId: '' })
+}>({ imgUrl: '', imgId: '' })
 
 // 数据验证
 const validate = reactive({
@@ -78,11 +79,16 @@ const validate = reactive({
     }
   ],
   checkPassword: [
-    { required: true, message: '请确认密码' },
     {
-      pattern: /^[0-9A-Za-z_@/.]{3,20}$/,
-      message: '两次输入不一致',
-      trigger: 'blur'
+      validator: async (_rule: Rule, value: string) => {
+        if (value === '') {
+          return Promise.reject(Error('请确认密码'))
+        }
+        if (value !== formState.password) {
+          return Promise.reject(Error('两次输入不一致'))
+        }
+        return Promise.resolve()
+      }
     }
   ],
   captcha: [
@@ -119,11 +125,10 @@ const getEmailCaptcha = () => {
     method: 'POST',
     data: { email: formState.email }
   })
-    .then((res) => {
-      console.log(res)
+    .then(() => {
       alert.success('验证码已发送')
     })
-    .catch((err) => {
+    .catch(() => {
       alert.error('验证码未发送')
     })
 }
