@@ -1,0 +1,1 @@
+import{R as n}from"./responsiveObserve-654b758a.js";import{b as s,g as u,z as r,S as e,G as i}from"./index-9e567f9b.js";function a(){var e=s({}),i=null;return u((function(){i=n.subscribe((function(n){e.value=n}))})),r((function(){n.unsubscribe(i)})),e}function o(n){var s=e();return i((function(){s.value=n()}),{flush:"sync"}),s}export{o as e,a as u};
