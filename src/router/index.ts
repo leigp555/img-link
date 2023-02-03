@@ -16,16 +16,6 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/components/Upload.vue')
       },
       {
-        path: 'about',
-        name: 'About',
-        component: () => import('@/components/About.vue')
-      },
-      {
-        path: 'concat',
-        name: 'Concat',
-        component: () => import('@/components/Concat.vue')
-      },
-      {
         path: 'changeLog',
         name: 'ChangeLog',
         component: () => import('@/components/ChangeLog.vue')

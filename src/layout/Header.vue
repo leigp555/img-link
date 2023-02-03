@@ -5,8 +5,8 @@ import SvgIcon from '@/components/SvgIcon.vue'
 import { useProfileStore } from '@/store/user_profile'
 
 const userStore = useProfileStore()
-const avatarRef = ref<HTMLElement>(null)
-const login_register_ref = ref<HTMLElement>(null)
+const avatarRef = ref<HTMLElement | null>(null)
+const login_register_ref = ref<HTMLElement | null>(null)
 const checked = ref<boolean>(false)
 const theme_change = (isChecked: boolean) => {
   if (isChecked) {
@@ -42,14 +42,12 @@ onMounted(() => {
       <!--      左边导航-->
       <div class="navbar-left">
         <router-link to="/home/upload">图片上传</router-link>
-        <router-link to="/home/about">关于</router-link>
-        <router-link to="/home/concat">联系我</router-link>
+        <router-link to="/apiDocs">API 文档</router-link>
+        <router-link to="/manage">图片管理</router-link>
       </div>
       <!--      右边导航-->
       <div class="navbar-right">
         <router-link to="/home/changeLog">版本变更</router-link>
-        <router-link to="/apiDocs">API 文档</router-link>
-        <router-link to="/manage">图片管理</router-link>
         <a-switch v-model:checked="checked" @change="theme_change" class="switch">
           <template #checkedChildren>
             <span class="switch-svg">
